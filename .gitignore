@@ -1,0 +1,11 @@
+# ROS 2 workspace build artifacts (relative path)
+../build/
+../install/
+../log/
+
+# Python virtual environments
+venv/
+
+# Editor/OS specific files
+.vscode/
+.DS_Store
