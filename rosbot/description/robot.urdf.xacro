@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
+
+    <xacro:arg name="sim_mode" default="true"/>
+    <xacro:arg name="use_ros2_control" default="true"/>
+
+    
+    <xacro:include filename="robot_core.xacro" />
+
+    <xacro:if value="$(arg use_ros2_control)">
+        <xacro:include filename="ros2_control.xacro" />
+    </xacro:if>
+    <xacro:unless value="$(arg use_ros2_control)">
+        <xacro:include filename="gazebo_diffdrive.xacro" />
+    </xacro:unless>
+    <xacro:include filename="six_axis.xacro"/>
+
+    <xacro:include filename="lidar.xacro"/>
+    
+    <joint name="arm_mount_joint" type="fixed">
+  <parent link="base_link"/>         <!-- Your chassis's main base link -->
+  <child link="base_link_arm"/>      <!-- The renamed root link of your arm -->
+  <!-- Adjust xyz below so the arm is at the front/top of your chassis -->
+  <origin xyz="${chassis_length/3} 0 ${chassis_height}" rpy="0 0 0"/>
+</joint>
+
+
+
+</robot>
+
